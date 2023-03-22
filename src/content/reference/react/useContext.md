@@ -4,7 +4,7 @@ title: useContext
 
 <Intro>
 
-`useContext` is a React Hook that lets you read and subscribe to [context](/learn/passing-data-deeply-with-context) from your component.
+`useContext` 是一个能允许你从组件中读取和订阅 [context](/learn/passing-data-deeply-with-context) 的 React Hook。
 
 ```js
 const value = useContext(SomeContext)
@@ -16,11 +16,11 @@ const value = useContext(SomeContext)
 
 ---
 
-## Reference {/*reference*/}
+## 参考 {/*reference*/}
 
 ### `useContext(SomeContext)` {/*usecontext*/}
 
-Call `useContext` at the top level of your component to read and subscribe to [context.](/learn/passing-data-deeply-with-context)
+在组件的顶级调用 `useContext` 来读取和订阅 [context。](/learn/passing-data-deeply-with-context)
 
 ```js
 import { useContext } from 'react';
@@ -30,21 +30,21 @@ function MyComponent() {
   // ...
 ```
 
-[See more examples below.](#usage)
+[看下方更多示例。](#usage)
 
-#### Parameters {/*parameters*/}
+#### 参数 {/*parameters*/}
 
-* `SomeContext`: The context that you've previously created with [`createContext`](/reference/react/createContext). The context itself does not hold the information, it only represents the kind of information you can provide or read from components.
+* `SomeContext`: 这个context是你先前通过调用 [`createContext`](/reference/react/createContext) 创建的。context本身不保存任何信息，他仅代表着一种你能提供或者从组件中获取的信息。
 
-#### Returns {/*returns*/}
+#### 返回值 {/*returns*/}
 
-`useContext` returns the context value for the calling component. It is determined as the `value` passed to the closest `SomeContext.Provider` above the calling component in the tree. If there is no such provider, then the returned value will be the `defaultValue` you have passed to [`createContext`](/reference/react/createContext) for that context. The returned value is always up-to-date. React automatically re-renders components that read some context if it changes.
+`useContext` 为调用的组件返回 context 的值 value。他取决于组件树中离调用组件最近上层级传递给 `SomeContext.Provider` 的 `value`。如果没有这样的 provider，那么返回值就会是创建 context 时传递给 [`createContext`](/reference/react/createContext) 的 `defaultValue`。返回值总是保持最新的。React 会自动重新渲染组件如果读取到的context发生改变。
 
-#### Caveats {/*caveats*/}
+#### 注意事项 {/*caveats*/}
 
-* `useContext()` call in a component is not affected by providers returned from the *same* component. The corresponding `<Context.Provider>` **needs to be *above*** the component doing the `useContext()` call.
-* React **automatically re-renders** all the children that use a particular context starting from the provider that receives a different `value`. The previous and the next values are compared with the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. Skipping re-renders with [`memo`](/reference/react/memo) does not prevent the children receiving fresh context values.
-* If your build system produces duplicates modules in the output (which can happen with symlinks), this can break context. Passing something via context only works if `SomeContext` that you use to provide context and `SomeContext` that you use to read it are ***exactly* the same object**, as determined by a `===` comparison.
+* `useContext()`在组件中的调用不受该组件返回的 provider 的影响。相应的`<Context.Provider>`需要在调用 `useContext()` 的组件的上层级。
+* 当 provider 接收到与先前不同的 `value` 时，React 会自动地重新渲染使用了该特定 context 的 children。 先前的值和即将到来的值会以 [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 做比较。 使用 [`memo`](/reference/react/memo) 来跳过重新渲染并不妨碍children接收到新的context值。 
+* 如果你的构建系统在输出中产生了重复的模块（符号链接可能会出现），这样可能会破坏 context。If your build system produces duplicates modules in the output (which can happen with symlinks), this can break context. Passing something via context only works if `SomeContext` that you use to provide context and `SomeContext` that you use to read it are ***exactly* the same object**, as determined by a `===` comparison.
 
 ---
 
